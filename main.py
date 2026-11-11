@@ -1,4 +1,4 @@
-# expense tracker - trying to make menu loop
+# expense tracker - trying filter by category
 
 expenses = []
 
@@ -9,7 +9,8 @@ def main():
         print()
         print("1. Add expense")
         print("2. Show expenses")
-        print("3. Exit")
+        print("3. Filter by category")
+        print("4. Exit")
         choice = input("Enter choice: ")
         
         if choice == "1":
@@ -25,8 +26,14 @@ def main():
                 print("no expenses yet")
             else:
                 for e in expenses:
-                    print(e)
+                    print(e["date"], e["category"], e["amount"])
         elif choice == "3":
+            cat = input("enter category to filter: ")
+            print("filtered expenses:")
+            for e in expenses:
+                if e["category"] == cat:
+                    print(e)
+        elif choice == "4":
             print("bye")
             break
         else:
