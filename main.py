@@ -1,4 +1,4 @@
-# expense tracker - still learning
+# expense tracker - fixed the list a bit
 
 expenses = []
 
@@ -13,14 +13,14 @@ def main():
         amount = input("Enter amount: ")
         category = input("Enter category: ")
         date = input("Enter date (YYYY-MM-DD): ")
-        # I think this is how to store it
-        expenses.append(amount)
-        expenses.append(category)
-        expenses.append(date)
+        # trying dictionary this time
+        expense = {"amount": amount, "category": category, "date": date}
+        expenses.append(expense)
         print("expense added!!")
     elif choice == "2":
         print("here are your expenses:")
-        print(expenses)
+        for e in expenses:
+            print(e)
     elif choice == "3":
         print("bye")
     else:
