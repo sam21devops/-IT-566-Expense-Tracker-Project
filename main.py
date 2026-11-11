@@ -1,4 +1,6 @@
-# expense tracker - trying filter by category
+# expense tracker - trying to save to file
+
+import json
 
 expenses = []
 
@@ -10,7 +12,8 @@ def main():
         print("1. Add expense")
         print("2. Show expenses")
         print("3. Filter by category")
-        print("4. Exit")
+        print("4. Save to file")
+        print("5. Exit")
         choice = input("Enter choice: ")
         
         if choice == "1":
@@ -26,14 +29,24 @@ def main():
                 print("no expenses yet")
             else:
                 for e in expenses:
-                    print(e["date"], e["category"], e["amount"])
+                    print(e["date"], "-", e["category"], "-", e["amount"])
         elif choice == "3":
             cat = input("enter category to filter: ")
             print("filtered expenses:")
+            found = False
             for e in expenses:
                 if e["category"] == cat:
-                    print(e)
+                    print(e["date"], e["category"], e["amount"])
+                    found = True
+            if found == False:
+                print("nothing found")
         elif choice == "4":
+            # save to json
+            f = open("expenses.json", "w")
+            json.dump(expenses, f)
+            f.close()
+            print("saved to expenses.json")
+        elif choice == "5":
             print("bye")
             break
         else:
