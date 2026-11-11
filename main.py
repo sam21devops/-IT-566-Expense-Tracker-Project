@@ -1,28 +1,14 @@
-# expense tracker project - almost done
+# expense tracker project - IT 566
+# simple beginner version
 
-import json
 import csv
+import storage
 
 expenses = []
 
-def load_expenses():
-    try:
-        f = open("expenses.json", "r")
-        data = json.load(f)
-        f.close()
-        return data
-    except:
-        return []
-
-def save_expenses():
-    f = open("expenses.json", "w")
-    json.dump(expenses, f)
-    f.close()
-    print("saved to expenses.json")
-
 def main():
     global expenses
-    expenses = load_expenses()
+    expenses = storage.load_expenses()
     print("Welcome To Expense Tracker Project")
     print("loaded", len(expenses), "expenses from file")
     
@@ -73,9 +59,8 @@ def main():
             if found == False:
                 print("nothing found in that range")
         elif choice == "5":
-            save_expenses()
+            storage.save_expenses(expenses)
         elif choice == "6":
-            # export to csv for excel
             f = open("expenses.csv", "w", newline="")
             writer = csv.writer(f)
             writer.writerow(["date", "category", "amount"])
@@ -84,7 +69,9 @@ def main():
             f.close()
             print("exported to expenses.csv - you can open in Excel")
         elif choice == "7":
-            print("bye")
+            # save before exit just in case
+            storage.save_expenses(expenses)
+            print("saved and bye")
             break
         else:
             print("wrong choice try again")
