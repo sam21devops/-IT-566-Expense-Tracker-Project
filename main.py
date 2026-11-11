@@ -1,11 +1,23 @@
-# expense tracker - trying to save to file
+# expense tracker - load and save
 
 import json
 
 expenses = []
 
+def load_expenses():
+    try:
+        f = open("expenses.json", "r")
+        data = json.load(f)
+        f.close()
+        return data
+    except:
+        return []
+
 def main():
+    global expenses
+    expenses = load_expenses()
     print("Welcome To Expense Tracker Project")
+    print("loaded", len(expenses), "expenses from file")
     
     while True:
         print()
@@ -35,13 +47,12 @@ def main():
             print("filtered expenses:")
             found = False
             for e in expenses:
-                if e["category"] == cat:
+                if e["category"].lower() == cat.lower():
                     print(e["date"], e["category"], e["amount"])
                     found = True
             if found == False:
                 print("nothing found")
         elif choice == "4":
-            # save to json
             f = open("expenses.json", "w")
             json.dump(expenses, f)
             f.close()
