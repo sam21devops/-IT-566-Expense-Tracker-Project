@@ -12,10 +12,14 @@ def main():
     if choice == "1":
         amount = input("Enter amount: ")
         category = input("Enter category: ")
+        date = input("Enter date (YYYY-MM-DD): ")
+        # I think this is how to store it
         expenses.append(amount)
         expenses.append(category)
-        print("expense added")
+        expenses.append(date)
+        print("expense added!!")
     elif choice == "2":
+        print("here are your expenses:")
         print(expenses)
     elif choice == "3":
         print("bye")
